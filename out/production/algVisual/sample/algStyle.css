@@ -1,0 +1,15 @@
+.root {
+    -fx-background-color:
+            linear-gradient(to top, #061308, #0c2d0c)
+
+}
+.button {
+    -fx-background-color:
+            #139913,
+            linear-gradient(#0db360, #0d955b);
+    -fx-font-family: "Roboto Thin";
+    -fx-background-radius: 2;
+}
+.choice-box{
+    -fx-background-color:#1cb095;
+}

@@ -1,82 +1,212 @@
 package sample;
 
 
+import javafx.animation.SequentialTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.util.StringConverter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 /*
 Kont
  */
 public class Controller extends BorderPane {
 
-    public static int window_width;
-    public static int window_height;
-    public static final int XGAP = 10;
-    public static final int BUTTONROW_BOUNDARY = 100;
+    //nepodarilo se mi udelat dynamicky resize, takze ke kontrole animaci spoleham na velikost obrazovky, ktera je zde zapsana
+    public static int b_window_width = 950;
+    public static int a_window_width = 1000;
+    public static int window_height = 500;
 
+    //oznacuje mezeru mezi prvky, aby nesplyvaly
+    public static final int node_gap = 5;
+
+    //dela misto pro interaktivni prvky
+    public static final int button_boundary = 100;
+
+    //ovlada pocet prvku a jejich pole
     public static int number_of_nodes = 20;
     private Node[] nodeArr;
 
-    private Pane display;
-    private HBox buttonRow;
-    private HBox insertRow;
-    private ChoiceBox<sortParent> choiceBox;
-    private Button sortButton;
-    private Button randomButton;
-    private TextArea input;
-    private Button submitButton;
-
     public Controller() {
 
-        this.display = new Pane();
-        this.buttonRow = new HBox();
-        this.insertRow = new HBox();
-        insertRow.setBorder(new Border(new BorderStroke(Color.BLACK,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        Pane display = new Pane();
+        HBox buttonRow = new HBox();
 
         this.setCenter(display);
         this.setBottom(buttonRow);
-        this.setTop(insertRow);
+
+        setAlignment(display, Pos.CENTER);
+
+        this.nodeArr = Randomize.randomize(number_of_nodes);
+
+        setAlignment(display, Pos.CENTER);
+        setMargin(display, new Insets(0,0,0,25));
+        setMargin(buttonRow, new Insets(0, 0, 20, 0));
+
+        display.getChildren().addAll(nodeArr);
 
 
+        HBox interactBox = new HBox();
 
-        this.sortButton = new Button("Sort");
-        this.randomButton = new Button("Random");
-        this.choiceBox = new ChoiceBox<>();
+        Button sortButton = new Button("Sort");
+        sortButton.setMinWidth(a_window_width /11);
 
-        this.input = new TextArea();
-        input.setPromptText("Insert values: 1, 2, 3");
-        input.setPrefWidth(buttonRow.getWidth());
-        this.submitButton = new Button("Submit");
-        submitButton.setPrefWidth(buttonRow.getWidth()/4);
+        Button randomButton = new Button("Random");
+        ChoiceBox<sortParent> choiceBox = new ChoiceBox<>();
 
-        buttonRow.getChildren().addAll(sortButton, randomButton, choiceBox);
+        Button submitButton = new Button("Submit");
+        Button customSubmit = new Button("Submit");
+
+
+        /*
+         * zavola metodu vybranou v choiceboxu, ktera pote vrati SequentialTransition k provedeni
+         * vypne random button a sort button, aby se nedalo v prubehu animace neco zkazit
+         * pro choicebox to neni potreba
+         */
+        sortButton.setOnAction(Event ->{
+            sortButton.setDisable(true);
+            randomButton.setDisable(true);
+            submitButton.setDisable(true);
+            customSubmit.setDisable(true);
+            sortParent sort = choiceBox.getSelectionModel().getSelectedItem();
+            SequentialTransition sq = sort.startSort(nodeArr);
+            sq.setOnFinished(e -> {
+                randomButton.setDisable(false);
+                submitButton.setDisable(false);
+                customSubmit.setDisable(false);
+            });
+            sq.play();
+        });
+
+        //zameni array nodu za novy random array
+        randomButton.setOnAction(event -> {
+            sortButton.setDisable(false);
+            display.getChildren().clear();
+            nodeArr = Randomize.randomize(number_of_nodes);
+            //display.getChildren().addAll(Arrays.asList(nodeArr));
+            display.getChildren().addAll(nodeArr);
+        });
+
+        //Arraylist vsech sortu v choiceboxu
+        List<sortParent> sortList = new ArrayList<>();
+        sortList.add(new bubbleSort());
+        sortList.add(new insertSort());
+        sortList.add(new selectSort());
+        sortList.add(new mergeSort());
+        sortList.add(new quickSort());
+        sortList.add(new heapSort());
+
+        VBox setNodeNumber = new VBox();
+        TextField numberField = new TextField();
+        numberField.setPromptText("Number of random nodes");
+
+
+        numberField.setPrefWidth(a_window_width /5);
+        submitButton.setMinWidth(a_window_width /5);
+
+        //zajistuje aby se nedalo zapsat nic jineho nez cisla
+        numberField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    numberField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        //dovoluje zadat pocet objektu v poli
+        submitButton.setOnAction(event -> {
+            sortButton.setDisable(false);
+            display.getChildren().clear();
+            this.number_of_nodes = Integer.parseInt(numberField.getText());
+            for (sortParent sort: sortList) {
+                sort.nodeWidth = b_window_width / number_of_nodes;
+            }
+            nodeArr = Randomize.randomize(number_of_nodes);
+            display.getChildren().addAll(nodeArr);
+        });
+
+        VBox customBox = new VBox();
+        TextField customInput = new TextField();
+        customInput.setPromptText("Custom input: 1 1 2 3 5 8 13 21");
+
+        customInput.setMinWidth(a_window_width / 5);
+        customSubmit.setMinWidth(a_window_width/5);
+
+        customSubmit.setAlignment(Pos.BOTTOM_CENTER);
+
+        //ovlada custom input do pole, Input je formou: 1 2 3
+        customSubmit.setOnAction(event -> {
+            sortButton.setDisable(false);
+            display.getChildren().clear();
+            String in = customInput.getText();
+            String[] sArr = in.split("[, ?.@]+");
+            int[] iArr = new int[sArr.length];
+            for (int i = 0; i < sArr.length; i++) {
+                try {
+                    iArr[i] = Integer.parseInt(sArr[i]);
+                }catch (Exception e){
+                    break;
+                }
+            }
+            int max = 0;
+            for(int i: iArr){
+                if (i > max){
+                    max = i;
+                }
+            }
+            Node[] temp = new Node[sArr.length];
+            for (int i = 0; i < sArr.length; i++){
+                temp[i] = new Node(iArr[i]);
+                temp[i].setValue(sArr.length, i, max);
+            }
+            this.nodeArr = temp;
+            this.number_of_nodes = sArr.length;
+            for (sortParent sort: sortList) {
+                sort.nodeWidth = b_window_width / number_of_nodes;
+            }
+            display.getChildren().addAll(nodeArr);
+        });
+
+        customBox.getChildren().addAll(customInput, customSubmit);
+
+        setNodeNumber.getChildren().addAll(numberField, submitButton);
+
+        choiceBox.setItems(FXCollections.observableArrayList(sortList));
+        choiceBox.getSelectionModel().select(0);
+
+        //konvertuje jmeno classy do choiceboxu
+        choiceBox.setConverter(new StringConverter<sortParent>() {
+            @Override
+            public String toString(sortParent sortParent) {
+                    return sortParent.getClass().getSimpleName();
+            }
+            @Override
+            public sortParent fromString(String string) {
+                return null;
+            }
+        });
+
+        interactBox.getChildren().addAll(sortButton, randomButton, choiceBox);
+        interactBox.setSpacing(5);
+
+        buttonRow.getChildren().addAll(setNodeNumber, interactBox, customBox);
         buttonRow.setAlignment(Pos.CENTER);
+        buttonRow.setSpacing(20);
 
-        for (javafx.scene.Node b : buttonRow.getChildren()) {
-            buttonRow.setMargin(b, new Insets(5, 5, 20, 5));
-        }
 
-        insertRow.getChildren().addAll(input, submitButton);
-        insertRow.setAlignment(Pos.CENTER);
 
-        List<sortParent> sortParentArrayList = new ArrayList<>();
-        sortParentArrayList.add(new sortParent());
-        sortParentArrayList.add(new sortParent());
-        sortParentArrayList.add(new sortParent());
 
-        choiceBox.setItems(FXCollections.observableArrayList(sortParentArrayList));
 
-        display.getChildren().addAll(Arrays.asList(nodes));
     }
 }
 
