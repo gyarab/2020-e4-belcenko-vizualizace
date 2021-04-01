@@ -6,30 +6,16 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/algVisual_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/algStyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/bubbleSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/heapSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/insertSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/mergeSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/quickSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/selectSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="fixed null input">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/algVisual/META-INF/algVisual.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algVisual.jar" beforeDir="false" afterPath="$PROJECT_DIR$/algVisual.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/algVisual_jar/algVisual.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/algVisual_jar/algVisual.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/algVisual/sample/Controller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/algVisual/sample/Controller$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/algVisual/sample/Controller$2.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/algVisual/sample/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/algVisual/sample/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/algVisual/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/algVisual/sample/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/algVisual/sample/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/algVisual/sample/Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/algVisual/sample/Randomize.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/algVisual/sample/Randomize.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/algVisual/sample/sortParent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/algVisual/sample/sortParent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/algVisual/sample/mergeSort.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/algVisual/sample/mergeSort.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Randomize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Randomize.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/sortParent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/sortParent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/mergeSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/mergeSort.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +124,7 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="copyright" />
   </component>
-  <component name="RunManager" selected="JAR Application.VizualizaceAlgoritmu">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
       <option name="MAIN_CLASS_NAME" />
@@ -270,7 +256,7 @@
       <workItem from="1616332396153" duration="15063000" />
       <workItem from="1616928680881" duration="25072000" />
       <workItem from="1617138023230" duration="2795000" />
-      <workItem from="1617195587643" duration="28172000" />
+      <workItem from="1617195587643" duration="32553000" />
     </task>
     <servers />
   </component>
@@ -281,6 +267,8 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <MESSAGE value="fixed null input" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed null input" />
   </component>
   <component name="WindowStateProjectService">
     <state x="740" y="325" key="#BuildArtifactsBeforeRunChooser" timestamp="1617224453485">
@@ -311,26 +299,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="376" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1617222617339" />
+    <state x="611" y="114" key="CommitChangelistDialog2" timestamp="1617273746863">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="611" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1617273746863" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1617224416171">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1617224416171" />
-    <state width="1877" height="269" key="GridCell.Tab.0.bottom" timestamp="1617224696095">
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom" timestamp="1617273862144">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1617224696095" />
-    <state width="1877" height="269" key="GridCell.Tab.0.center" timestamp="1617224696095">
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1617273862144" />
+    <state width="1877" height="269" key="GridCell.Tab.0.center" timestamp="1617273862143">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1617224696095" />
-    <state width="1877" height="269" key="GridCell.Tab.0.left" timestamp="1617224696095">
+    <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1617273862143" />
+    <state width="1877" height="269" key="GridCell.Tab.0.left" timestamp="1617273862143">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1617224696095" />
-    <state width="1877" height="269" key="GridCell.Tab.0.right" timestamp="1617224696095">
+    <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1617273862143" />
+    <state width="1877" height="269" key="GridCell.Tab.0.right" timestamp="1617273862143">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1617224696095" />
+    <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1617273862143" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1617223333882">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

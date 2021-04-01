@@ -55,7 +55,6 @@ public class mergeSort extends sortParent {
             }
         }
 
-
         return pt;
     }
 
@@ -63,13 +62,13 @@ public class mergeSort extends sortParent {
     * Kvuli neznamym duvodum mi u teto classy nefungovala metoda SequentialTransition, ale dala se ke stesti nahradit ArrayList<Transition>, ktery pak jde konvertovat
     * Obvykla rekurzivni forma
      */
-    private ArrayList<Transition> mergeSort(Node[] arr, int beg, int end) {
+    private ArrayList<Transition> mergesort(Node[] arr, int beg, int end) {
         ArrayList<Transition> transitions = new ArrayList<>();
 
         if (beg < end) {
             int mid = (beg + end) / 2;
-            transitions.addAll(mergeSort(arr, beg, mid));
-            transitions.addAll(mergeSort(arr, mid + 1, end));
+            transitions.addAll(mergesort(arr, beg, mid));
+            transitions.addAll(mergesort(arr, mid + 1, end));
             transitions.add(merge(arr, beg, mid, end));
         }
 
@@ -82,7 +81,7 @@ public class mergeSort extends sortParent {
         this.OGArray = new Node[arr.length];
 
         SequentialTransition sq = new SequentialTransition();
-        sq.getChildren().addAll(mergeSort(arr, 0, arr.length - 1));
+        sq.getChildren().addAll(mergesort(arr, 0, arr.length - 1));
 
         return sq;
     }

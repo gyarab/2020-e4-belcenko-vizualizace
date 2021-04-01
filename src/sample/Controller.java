@@ -2,8 +2,6 @@ package sample;
 
 
 import javafx.animation.SequentialTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -113,21 +111,22 @@ public class Controller extends BorderPane {
         submitButton.setMinWidth(a_window_width /5);
 
         //zajistuje aby se nedalo zapsat nic jineho nez cisla
-        numberField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    numberField.setText(newValue.replaceAll("[^\\d]", ""));
-                }
+        numberField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                numberField.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
 
         //dovoluje zadat pocet objektu v poli
         submitButton.setOnAction(event -> {
+            try{
+                this.number_of_nodes = Integer.parseInt(numberField.getText());
+            }catch(Exception e){
+                System.out.println("Couldn't parse Integer");
+                return;
+            }
             sortButton.setDisable(false);
             display.getChildren().clear();
-            this.number_of_nodes = Integer.parseInt(numberField.getText());
             for (sortParent sort: sortList) {
                 sort.nodeWidth = b_window_width / number_of_nodes;
             }
@@ -146,18 +145,19 @@ public class Controller extends BorderPane {
 
         //ovlada custom input do pole, Input je formou: 1 2 3
         customSubmit.setOnAction(event -> {
-            sortButton.setDisable(false);
-            display.getChildren().clear();
             String in = customInput.getText();
             String[] sArr = in.split("[, ?.@]+");
             int[] iArr = new int[sArr.length];
-            for (int i = 0; i < sArr.length; i++) {
-                try {
+            try{
+                for (int i = 0; i < sArr.length; i++) {
                     iArr[i] = Integer.parseInt(sArr[i]);
-                }catch (Exception e){
-                    break;
                 }
+            }catch(Exception e){
+                System.out.println("Couldn't parse Integer");
+                return;
             }
+            sortButton.setDisable(false);
+            display.getChildren().clear();
             int max = 0;
             for(int i: iArr){
                 if (i > max){
