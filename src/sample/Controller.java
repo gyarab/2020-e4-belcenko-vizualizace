@@ -19,8 +19,8 @@ Kont
 public class Controller extends BorderPane {
 
     //nepodarilo se mi udelat dynamicky resize, takze ke kontrole animaci spoleham na velikost obrazovky, ktera je zde zapsana
-    public static int b_window_width = 950;
     public static int a_window_width = 1000;
+    public static int b_window_width = a_window_width- 50;
     public static int window_height = 500;
 
     //oznacuje mezeru mezi prvky, aby nesplyvaly
