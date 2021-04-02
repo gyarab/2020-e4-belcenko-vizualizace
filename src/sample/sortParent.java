@@ -18,6 +18,8 @@ public abstract class sortParent {
 
     public abstract SequentialTransition startSort(Node[] arr);
 
+    public abstract Node[] worstCase();
+
     //metoda k prohozeni 2 prvku
     public ParallelTransition swap(Node[] arr, int i, int j) {
         //graficky swap

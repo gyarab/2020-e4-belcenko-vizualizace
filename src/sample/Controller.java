@@ -19,9 +19,9 @@ Kont
 public class Controller extends BorderPane {
 
     //nepodarilo se mi udelat dynamicky resize, takze ke kontrole animaci spoleham na velikost obrazovky, ktera je zde zapsana
-    public static int a_window_width = 1000;
-    public static int b_window_width = a_window_width- 50;
-    public static int window_height = 500;
+    public static int a_window_width = 1920;
+    public static int b_window_width = a_window_width - 50;
+    public static int window_height = 900;
 
     //oznacuje mezeru mezi prvky, aby nesplyvaly
     public static final int node_gap = 5;
@@ -30,7 +30,7 @@ public class Controller extends BorderPane {
     public static final int button_boundary = 100;
 
     //ovlada pocet prvku a jejich pole
-    public static int number_of_nodes = 20;
+    public static int number_of_nodes = 30;
     private Node[] nodeArr;
 
     public Controller() {
@@ -63,6 +63,7 @@ public class Controller extends BorderPane {
         Button submitButton = new Button("Submit");
         Button customSubmit = new Button("Submit");
 
+        Button worstCase = new Button("Worst case");
 
         /*
          * zavola metodu vybranou v choiceboxu, ktera pote vrati SequentialTransition k provedeni
@@ -89,7 +90,6 @@ public class Controller extends BorderPane {
             sortButton.setDisable(false);
             display.getChildren().clear();
             nodeArr = Randomize.randomize(number_of_nodes);
-            //display.getChildren().addAll(Arrays.asList(nodeArr));
             display.getChildren().addAll(nodeArr);
         });
 
@@ -177,6 +177,22 @@ public class Controller extends BorderPane {
             display.getChildren().addAll(nodeArr);
         });
 
+        //vraci nejhorsi pole pro dany al
+        worstCase.setOnAction(event -> {
+            sortButton.setDisable(false);
+            display.getChildren().clear();
+            nodeArr = choiceBox.getSelectionModel().getSelectedItem().worstCase();
+            display.getChildren().addAll(nodeArr);
+        });
+
+        choiceBox.setOnAction(event -> {
+            if(choiceBox.getSelectionModel().getSelectedItem().getClass().getSimpleName().equals("heapSort")){
+                worstCase.setDisable(true);
+            }else{
+                worstCase.setDisable(false);
+            }
+        });
+
         customBox.getChildren().addAll(customInput, customSubmit);
 
         setNodeNumber.getChildren().addAll(numberField, submitButton);
@@ -199,7 +215,7 @@ public class Controller extends BorderPane {
         interactBox.getChildren().addAll(sortButton, randomButton, choiceBox);
         interactBox.setSpacing(5);
 
-        buttonRow.getChildren().addAll(setNodeNumber, interactBox, customBox);
+        buttonRow.getChildren().addAll(setNodeNumber, interactBox, customBox, worstCase);
         buttonRow.setAlignment(Pos.CENTER);
         buttonRow.setSpacing(20);
 

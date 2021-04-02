@@ -50,4 +50,15 @@ public class quickSort extends sortParent{
 
         return transitions;
     }
+
+    @Override
+    public Node[] worstCase() {
+        int num = Controller.number_of_nodes;
+        Node[] arr = new Node[num];
+        for (int i = 0; i < num; i++) {
+            arr[i] = new Node(i+1);
+            arr[i].setValue(num, i, num);
+        }
+        return arr;
+    }
 }

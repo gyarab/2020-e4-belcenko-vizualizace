@@ -38,4 +38,17 @@ public class bubbleSort extends sortParent {
         return transitions;
     }
 
+    @Override
+    public Node[] worstCase() {
+        int num = Controller.number_of_nodes;
+        Node[] arr = new Node[num];;
+        int j = num;
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = new Node(j);
+            arr[i].setValue(num, i, num);
+            j--;
+        }
+        return arr;
+    }
+
 }

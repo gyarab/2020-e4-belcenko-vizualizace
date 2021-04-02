@@ -85,4 +85,24 @@ public class mergeSort extends sortParent {
 
         return sq;
     }
+
+    @Override
+    public Node[] worstCase() {
+        int num = Controller.number_of_nodes;
+        Node[] arr = new Node[num];;
+        int mid = num/2;
+        int j = 0;
+        for (int i = 1; i <= num; i++) {
+            if(i % 2 != 0){
+                arr[mid] = new Node(i);
+                arr[mid].setValue(num, mid, num);
+                mid++;
+            }else{
+                arr[j] = new Node(i);
+                arr[j].setValue(num, j, num);
+                j++;
+            }
+        }
+        return arr;
+    }
 }

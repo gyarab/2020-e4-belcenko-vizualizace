@@ -48,4 +48,9 @@ public class heapSort extends sortParent {
 
         return transitions;
     }
+
+    @Override
+    public Node[] worstCase() {
+        return new Node[0];
+    }
 }
