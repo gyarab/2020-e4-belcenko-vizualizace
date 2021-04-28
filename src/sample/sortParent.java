@@ -3,8 +3,11 @@ package sample;
 import javafx.animation.FillTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.SequentialTransition;
+import javafx.animation.Transition;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
 
 
 public abstract class sortParent {
@@ -14,11 +17,13 @@ public abstract class sortParent {
     final Color selected_color = Color.RED;
     final Color compare_color = Color.BLUEVIOLET;
     final Color sorted_color = Color.GREEN;
-    private SequentialTransition transitions;
+
 
     public abstract SequentialTransition startSort(Node[] arr);
 
     public abstract Node[] worstCase();
+
+    public abstract String getInfo();
 
     //metoda k prohozeni 2 prvku
     public ParallelTransition swap(Node[] arr, int i, int j) {

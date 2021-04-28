@@ -6,6 +6,8 @@ public class bubbleSort extends sortParent {
 
     private SequentialTransition transitions;
 
+
+
     //bubblesort, co jineho, prochazi pole a porovnava vedlejsi elementy
     public void bubblesort(Node[] arr){
         boolean sorted = true;
@@ -49,6 +51,14 @@ public class bubbleSort extends sortParent {
             j--;
         }
         return arr;
+    }
+
+    @Override
+    public String getInfo() {
+        return "\u2022 Stable\n" +
+                "\u2022 Average performance: O(n\u00B2)\n" +
+                "\u2022 Worst-case performance: O(n\u00B2)\n" +
+                "The algorithm repeatedly goes through the list and compares adjacent elements,\nthen swaps them if they are in the wrong order.\nThis is repeated until the list is sorted.\n";
     }
 
 }

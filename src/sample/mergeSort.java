@@ -105,4 +105,15 @@ public class mergeSort extends sortParent {
         }
         return arr;
     }
+
+    @Override
+    public String getInfo() {
+        return "\u2022 Stable\n" +
+                "\u2022 Average performance: O(n*log(n))\n" +
+                "\u2022 Worst-case performance: O(n*log(n))\n" +
+                "The algorithm works on recursion and subdivides itself\n" +
+                "There are basically 2 steps:\n" +
+                "\u2022 Divide the unsorted list into n sublists, each containing one element (a list of one element is considered sorted)\n" +
+                "\u2022 Repeatedly merge sublists into sorted sublists until there is only one sublist remaining. This will be the sorted list\n";
+    }
 }

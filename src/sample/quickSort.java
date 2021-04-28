@@ -61,4 +61,18 @@ public class quickSort extends sortParent{
         }
         return arr;
     }
+
+    @Override
+    public String getInfo() {
+        return "\u2022 Unstable\n" +
+                "\u2022 Average performance: O(n*log(n))\n" +
+                "\u2022 Worst-case performance: O(n\u00B2)\n" +
+                "The algorithm works on recursion and subdivides itself\n" +
+                "The basic principle is:\n" +
+                "\u2022 Choose a random or a previously selected item, this will be called a pivot\n" +
+                "\u2022 Move very item greater than the pivot to the right of the pivot\n" +
+                "\u2022 Move every item smaller than the pivot to the left of the pivot\n" +
+                "\u2022 The pivot is now considered sorted\n" +
+                "\u2022 Do all of the above again for the left and right side of the pivot while the size of the sublist is greater than 2\n";
+    }
 }

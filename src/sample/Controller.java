@@ -3,12 +3,22 @@ package sample;
 
 import javafx.animation.SequentialTransition;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.util.ArrayList;
@@ -215,7 +225,40 @@ public class Controller extends BorderPane {
         interactBox.getChildren().addAll(sortButton, randomButton, choiceBox);
         interactBox.setSpacing(5);
 
-        buttonRow.getChildren().addAll(setNodeNumber, interactBox, customBox, worstCase);
+        ImageView view = new ImageView(new Image(getClass().getResourceAsStream("baseline_info_black_24dp.png")));
+        view.setPreserveRatio(true);
+        Button infoButton = new Button();
+        infoButton.setGraphic(view);
+
+        infoButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                final Stage myDialog = new Stage();
+                myDialog.initModality(Modality.WINDOW_MODAL);
+
+                Button okButton = new Button("CLOSE");
+                okButton.setOnAction(new EventHandler<ActionEvent>(){
+
+                    @Override
+                    public void handle(ActionEvent arg0) {
+                        myDialog.close();
+                    }
+
+                });
+
+                Scene myDialogScene = new Scene(VBoxBuilder.create()
+                        .children(new Text(choiceBox.getSelectionModel().getSelectedItem().getInfo()), okButton)
+                        .alignment(Pos.CENTER)
+                        .padding(new Insets(20,20,20,20))
+                        .build());
+
+                myDialog.setScene(myDialogScene);
+                myDialog.show();
+            }
+        });
+
+        buttonRow.getChildren().addAll(infoButton, setNodeNumber, interactBox, customBox, worstCase);
         buttonRow.setAlignment(Pos.CENTER);
         buttonRow.setSpacing(20);
 

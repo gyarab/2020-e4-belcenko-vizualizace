@@ -53,4 +53,14 @@ public class heapSort extends sortParent {
     public Node[] worstCase() {
         return new Node[0];
     }
+
+    @Override
+    public String getInfo() {
+        return "\u2022 Usntable\n" +
+                "\u2022 Average performance: O(n*log(n))\n" +
+                "\u2022 Worst-case performance: O(n*log(n))\n" +
+                "The algorithm works on the principle of a heap\n" +
+                "A heap is a tree-based data structure, in which the parent must be always smaller/greater than the child\n" +
+                "We must first create a heap from the array, then we can continuously remove the smallest/largest number and thus create a sorted array\n";
+    }
 }

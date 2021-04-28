@@ -62,4 +62,16 @@ public class selectSort extends sortParent  {
         return arr;
     }
 
+    @Override
+    public String getInfo() {
+        return "\u2022 Unstable\n" +
+                "\u2022 Average performance: O(n\u00B2)\n" +
+                "\u2022 Worst-case performance: O(n\u00B2)\n" +
+                "The algorithm divides the input list into two parts:\n" +
+                "\u2022 a sorted sublist of items\n" +
+                "\u2022 and a sublist of the remaining unsorted items\n" +
+                "Initially, the sorted sublist is empty and the unsorted sublist is the entire input list.\n" +
+                "The algorithm finds the smallest element in the unsorted sublist, and swaps it with the leftmost unsorted element.\n";
+    }
+
 }
